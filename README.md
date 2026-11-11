@@ -51,8 +51,8 @@ NC4 (`showDatePicker`) không chọn vì thêm hạn chót kéo theo đổi mode
 ```
 lib/main.dart                 # toàn bộ ứng dụng, ~470 dòng
 test/widget_test.dart         # 7 bài kiểm thử widget
-docs/screenshots/             # 23 ảnh chụp từ máy ảo (adb, không dàn dựng)
-docs/logs/                    # flutter_analyze.txt, phan_tich.txt
+docs/screenshots/             # 22 ảnh chụp từ máy ảo (adb, không dàn dựng) + 2 ảnh cửa sổ analyze (đầy đủ và bản cắt)
+docs/logs/                    # flutter_analyze.txt, flutter_test.txt, phan_tich.txt
 docs/F6_231A290134_demo.mp4   # video demo
 ```
 
@@ -85,11 +85,16 @@ flutter run                 # hoặc: flutter build apk --debug
 ```
 $ flutter analyze
 Analyzing F6_231A290134...
-No issues found! (ran in 1.4s)
+No issues found! (ran in 1.2s)
 
 $ flutter test
 00:03 +7: All tests passed!
 ```
+
+Bảy widget test trong `test/widget_test.dart` kiểm tra: khung Scaffold có `NavigationBar` + FAB; tab Thống kê
+đếm 6/17 trên dữ liệu gốc; hộp thoại thêm việc báo lỗi và không đóng khi để trống; thêm việc mới vào đầu danh
+sách; giữ lâu để xóa rồi HOÀN TÁC đưa việc về đúng vị trí; menu ẩn việc đã xong mà Thống kê không đổi; bật chế
+độ tối đổi `themeMode` của `MaterialApp`.
 
 ## Minh chứng
 
@@ -108,8 +113,8 @@ $ flutter test
 | `f6_nc1_a.png` · `f6_nc1_b.png` · `f6_nc1_c.png` | NC1 — cuộn cuối, sang tab khác, quay lại vẫn đúng vị trí |
 | `f6_nc2_swipe.png` · `f6_nc2_xacnhan.png` | NC2 — đang vuốt (nền đỏ) và vẫn hỏi lại trước khi xóa |
 | `f6_caidat.png` · `f6_dark.png` · `f6_dark_list.png` | NC3 — công tắc tắt, bật chế độ tối, danh sách theo theme tối |
-| `f6_analyze.png` | Cửa sổ PowerShell thật chạy `flutter analyze` |
+| `f6_analyze.png` · `f6_analyze_crop.png` | Cửa sổ PowerShell thật chạy `flutter analyze` (bản đầy đủ và bản cắt dùng trong báo cáo) |
 
 Log của các thí nghiệm phục vụ 3 câu hỏi phân tích nằm trong [`docs/logs/`](docs/logs):
-`flutter_analyze.txt` (kết quả cuối) và `phan_tich.txt` (nguyên văn cảnh báo của từng thí nghiệm,
-kèm SHA-256 chứng minh `lib/main.dart` đã được khôi phục sau mỗi lần sửa).
+`flutter_analyze.txt` (kết quả cuối), `flutter_test.txt` (7 widget test) và `phan_tich.txt` (nguyên văn cảnh
+báo của từng thí nghiệm, kèm SHA-256 chứng minh `lib/main.dart` đã được khôi phục sau mỗi lần sửa).
