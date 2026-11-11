@@ -1,0 +1,59 @@
+KẾT QUẢ THÍ NGHIỆM PHỤC VỤ 3 CÂU HỎI PHÂN TÍCH
+Flutter 3.47.3 / Dart 3.13.3 — project E:\LTDiDong\F6_231A290134
+Mỗi thí nghiệm đều chạy flutter analyze trên đúng project, sau đó khôi phục lib/main.dart.
+
+--------------------------------------------------------------------
+A. Bỏ dòng  if (dongY && mounted) _xoa(cv);  →  if (dongY) _xoa(cv);
+   (code hiện tại: _xoa() tự gọi ScaffoldMessenger.of(context))
+--------------------------------------------------------------------
+Analyzing F6_231A290134...
+No issues found! (ran in 2.6s)
+
+Ghi chú: trình phân tích không nhìn xuyên qua lời gọi hàm. Vì _xoa() dùng
+context bên trong thân hàm, analyzer không thấy context bị dùng sau await,
+nên không phát cảnh báo. Lỗi vẫn có thể xảy ra lúc chạy.
+
+--------------------------------------------------------------------
+A2. Dùng context TRỰC TIẾP sau await, bỏ kiểm tra mounted
+--------------------------------------------------------------------
+Analyzing F6_231A290134...
+
+  info - Don't use 'BuildContext's across async gaps. Try rewriting the code to not use the 'BuildContext', or guard the use with a 'mounted' check - lib\main.dart:334:38 - use_build_context_synchronously
+
+1 issue found. (ran in 1.7s)
+
+--------------------------------------------------------------------
+B. return dongY;  thay vì  return dongY ?? false;
+--------------------------------------------------------------------
+Analyzing F6_231A290134...
+
+  error - A value of type 'bool?' can't be returned from the method '_xacNhanXoa' because it has a return type of 'Future<bool>' - lib\main.dart:152:12 - return_of_invalid_type
+
+1 issue found. (ran in 1.8s)
+
+--------------------------------------------------------------------
+B2. if (dongY) với bool? trong một tệp tối giản
+--------------------------------------------------------------------
+Analyzing F6_231A290134...
+
+  error - A nullable expression can't be used as a condition. Try checking that the value isn't 'null' before using it as a condition - lib\tmp_kiem_tra.dart:5:7 - unchecked_use_of_nullable_value
+  info - Don't invoke 'print' in production code. Try using a logging framework - lib\tmp_kiem_tra.dart:6:5 - avoid_print
+
+2 issues found. (ran in 1.4s)
+
+--------------------------------------------------------------------
+B3. Trong _tabCaiDat:  if (dongY == true && mounted)  →  if (dongY && mounted)
+--------------------------------------------------------------------
+Analyzing F6_231A290134...
+
+  error - A nullable expression can't be used as a condition. Try checking that the value isn't 'null' before using it as a condition - lib\main.dart:401:17 - unchecked_use_of_nullable_value
+
+1 issue found. (ran in 2.1s)
+
+--------------------------------------------------------------------
+KHÔI PHỤC
+--------------------------------------------------------------------
+Analyzing F6_231A290134...
+No issues found! (ran in 1.6s)
+
+SHA-256 của lib/main.dart sau khi khôi phục trùng với bản trước thí nghiệm.
